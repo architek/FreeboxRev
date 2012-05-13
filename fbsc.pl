@@ -3,7 +3,7 @@
 #
 #           FILE: fbsc.pl
 #
-#  EXAMPLE USAGE: ./fb.pl -pa 'pass!word$' storage.cgi
+#  EXAMPLE USAGE: ./fb.pl -pa 'pass!word$' storage.cgi=storage.list fw.cgi=fw.wan_redirs_get
 #
 #    DESCRIPTION: Allows to get information from the freebox revolution
 #
@@ -66,21 +66,22 @@ warn "Trying to connect to freebox at $endpoint ...\n";
 $mech->get($endpoint);
 $mech->submit_form( with_fields => { login => "freebox", passwd => $passwd } );
 
-while (my $values = shift) {
+while (my $param = shift) {
+  my ($uri,$method) = map { m/^(.*?)=(.*)$/ } $param;
   $res = do_jsonrpc(
-    $values,
+    $uri,
     to_json(
         {
             jsonrpc => '2.0',
             id      => 0,
-            method  => 'storage.list',
+            method  => $method,
             #params => ['hello'],
         }
     )
-)
+  );
+  print Dumper($res);
 } 
 
-print Dumper($res);
 
 
 =head1 SYNOPSIS
