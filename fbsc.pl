@@ -5,7 +5,7 @@
 #
 #  EXAMPLE USAGE: ./fb.pl -pa 'pass!word$' storage.cgi=storage.list fw.cgi=fw.wan_redirs_get
 #
-#    DESCRIPTION: Allows to get information from the freebox revolution
+#    DESCRIPTION: Get information from the freebox revolution through json API
 #
 #        VERSION: 0.1
 #        CREATED: 13/05/2012 21:49:48
